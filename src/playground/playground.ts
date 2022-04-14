@@ -69,7 +69,7 @@ main() {
     const colorAttribute = gl.getAttribLocation(program, 'color')
 
     gl.viewport(0, 0, width, height)
-    gl.clearColor(0, 0, 0, 0)
+    gl.clearColor(0, 0, 0, 1)
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
     const positionVAO = gl.createVertexArray()
@@ -78,7 +78,7 @@ main() {
     const vertexBuffer = gl.createBuffer()
     const indexBuffer = gl.createBuffer()
 
-    const normalize = (x: number, min: number, max: number, a: number = -1, b: number = 1) => {
+    const normalize = (x: number, min: number, max: number, a: number = 0, b: number = 1) => {
         const part1 = b - a;
         const part2a = x - min
         const part2b = max - min;
@@ -126,7 +126,6 @@ main() {
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexArray), gl.STATIC_DRAW)
-
 
         gl.drawElements(gl.TRIANGLES, indexArray.length, gl.UNSIGNED_SHORT, 0);
     });
