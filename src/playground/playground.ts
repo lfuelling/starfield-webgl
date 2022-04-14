@@ -78,7 +78,7 @@ main() {
     const vertexBuffer = gl.createBuffer()
     const indexBuffer = gl.createBuffer()
 
-    const normalize = (x: number, min: number, max: number, a: number = 0, b: number = 1) => {
+    const normalize = (x: number, min: number, max: number, a: number = -1, b: number = 1) => {
         const part1 = b - a;
         const part2a = x - min
         const part2b = max - min;
@@ -92,13 +92,16 @@ main() {
         const xZero = normalize(s.x, 0, 5000);
         const yZero = normalize(s.y, 0, 5000);
 
-        const xOne = xZero + normalize(s.size, 0, 5000);
-        const yOne = yZero + normalize(s.size, 0, 5000);
+        let normalizedSize = normalize(s.size, 0, 5000, 0);
+
+        const xOne = xZero < 0 ? xZero - normalizedSize : xZero + normalizedSize;
+        const yOne = yZero < 0 ? yZero - normalizedSize : yZero + normalizedSize;
+
 
         const color = {
-            r: normalize(1, 0, 255),
-            g: normalize(s.color.g, 0, 255),
-            b: normalize(s.color.b, 0, 255)
+            r: normalize(1, 0, 255, 0),
+            g: normalize(s.color.g, 0, 255, 0),
+            b: normalize(s.color.b, 0, 255, 0)
         }
 
         let vertex = [
