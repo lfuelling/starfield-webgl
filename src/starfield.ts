@@ -16,8 +16,7 @@ import {generateCanvas, generateStars} from "./utils";
 
             // iterate stars and draw them
             messageData.starfield.forEach((star) => {
-                // @ts-ignore it works (:
-                ctx.fillStyle = star.color;
+                ctx.fillStyle = star.color.rgbColorString();
                 ctx.fillRect(star.canvasCoords.x, star.canvasCoords.y, star.size, star.size);
             });
         }

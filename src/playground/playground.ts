@@ -90,17 +90,24 @@ main() {
         const xOne = xZero + normalize(s.size, 0, 5000);
         const yOne = yZero + normalize(s.size, 0, 5000);
 
-        return [
-         //  x      y       r  g  b  a
-            xOne,  yOne,    1, 1, 1, 1,
-            xZero, yOne,    1, 1, 1, 1,
-            xOne,  yZero,   1, 1, 1, 1,
-            xZero, yZero,   1, 1, 1, 1
-        ]
+        const color = {
+            r: normalize(1, 0, 255),
+            g: normalize(s.color.g, 0, 255),
+            b: normalize(s.color.b, 0, 255)
+        }
+
+        let vertex = [
+            //  x      y       r           g        b     a
+            xOne,  yOne,    color.r, color.g, color.b, 1,
+            xZero, yOne,    color.r, color.g, color.b, 1,
+            xOne,  yZero,   color.r, color.g, color.b, 1,
+            xZero, yZero,   color.r, color.g, color.b, 1
+        ];
+        console.log(vertex)
+        return vertex;
     })
 
     newVertexMatrix.forEach(vertexArray => {
-        console.log(vertexArray)
         gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexArray), gl.DYNAMIC_DRAW)
 

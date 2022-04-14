@@ -14,7 +14,7 @@ export const StarFactory = {
         const color = this._getWeightedRandomColor();
         const tintedColor = this._applyRandomShade(color);
         return {
-            ...new Star(x, y, size, this._getRGBColorString(tintedColor)),
+            ...new Star(x, y, size, tintedColor),
             canvasCoords: {
                 x: Math.round((x / COORDINATE_LENGTH) * canvasWidth),
                 y: Math.round((y / COORDINATE_LENGTH) * canvasHeight),
@@ -56,10 +56,6 @@ export const StarFactory = {
             color.b = Math.floor(color.b * shade);
         }
         return color;
-    },
-
-    _getRGBColorString: function (color: Color) {
-        return 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
     },
 
     // http://codetheory.in/weighted-biased-random-number-generation-with-javascript-based-on-probability/
