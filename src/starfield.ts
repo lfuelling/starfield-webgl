@@ -1,5 +1,6 @@
 import {StarFactory} from "./StarFactory";
 import {FunctionalWorker, MessageData, Star, StarfieldOptions} from "./types";
+import {generateCanvas} from "./utils";
 
 
 (() => {
@@ -46,20 +47,7 @@ import {FunctionalWorker, MessageData, Star, StarfieldOptions} from "./types";
     };
 
     document.addEventListener('DOMContentLoaded', function () {
-        const elem = document.querySelector('body');
-        const canvas = document.createElement('canvas');
-        canvas.id = 'starfield';
-        const styleProps = {position: 'fixed', left: 0, top: 0, width: '100%', height: '100%', 'z-index': -10};
-        const attrProps = {width: elem.clientWidth, height: elem.clientHeight};
-        for (const prop in styleProps) {
-            // @ts-ignore it works (:
-            canvas.style[prop] = styleProps[prop];
-        }
-        for (let prop in attrProps) {
-            // @ts-ignore it works (:
-            canvas.setAttribute(prop, attrProps[prop]);
-        }
-        elem.appendChild(canvas);
+        const canvas = generateCanvas();
 
         const stars = generateStars({starDensity: 1.2}, canvas);
 
