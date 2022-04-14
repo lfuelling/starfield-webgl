@@ -9,7 +9,7 @@ import {generateCanvas, generateStars} from "../utils";
 (() => {
 
     const canvas = generateCanvas();
-    const stars = generateStars({starDensity: 1.2}, canvas);
+    const stars = generateStars({starDensity: 6}, canvas);
 
     const gl = canvas.getContext('webgl2', {antialias: true})
     const width = canvas.clientWidth
@@ -111,7 +111,6 @@ main() {
             xOne, yZero, color.r, color.g, color.b, 1,
             xZero, yZero, color.r, color.g, color.b, 1
         ];
-        console.log(vertex)
         return vertex;
     })
 
