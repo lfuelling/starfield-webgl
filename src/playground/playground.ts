@@ -78,7 +78,7 @@ main() {
     const vertexBuffer = gl.createBuffer()
     const indexBuffer = gl.createBuffer()
 
-    const normalize = (x: number, min: number, max: number, a: number = 0, b: number = 1) => {
+    const normalize = (x: number, min: number, max: number, a: number = -1, b: number = 1) => {
         const part1 = b - a;
         const part2a = x - min
         const part2b = max - min;
