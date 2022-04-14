@@ -80,13 +80,15 @@ main() {
     const vertexBuffer = gl.createBuffer()
     const indexBuffer = gl.createBuffer()
 
+    const normalize = (v: number, min: number, max: number) => (v - min) / (max-min);
+
     const newVertexMatrix = stars.map(s => {
 
-        const xZero = (s.x / COORDINATE_LENGTH - s.size) * 100;
-        const yZero = (s.y / COORDINATE_LENGTH - s.size) * 100;
+        const xZero = normalize(s.x, 0, 5000);
+        const yZero = normalize(s.y, 0, 5000);
 
-        const xOne = xZero + s.size;
-        const yOne = yZero + s.size;
+        const xOne = xZero + normalize(s.size, 0, 5000);
+        const yOne = yZero + normalize(s.size, 0, 5000);
 
         return [
          //  x      y       r  g  b  a
