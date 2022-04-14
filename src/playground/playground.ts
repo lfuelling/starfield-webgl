@@ -5,17 +5,15 @@
 // have one object -- a simple two-dimensional square.
 //
 import {generateCanvas, generateStars} from "../utils";
-import {COORDINATE_LENGTH} from "../StarFactory";
 
 (() => {
 
     const canvas = generateCanvas();
     const stars = generateStars({starDensity: 1.2}, canvas);
 
-
     const gl = canvas.getContext('webgl2', {antialias: true})
-    const width = 800
-    const height = 500
+    const width = canvas.clientWidth
+    const height = canvas.clientHeight
 
     canvas.width = width
     canvas.height = height
@@ -80,7 +78,14 @@ main() {
     const vertexBuffer = gl.createBuffer()
     const indexBuffer = gl.createBuffer()
 
-    const normalize = (v: number, min: number, max: number) => (v - min) / (max-min);
+    const normalize = (x: number, min: number, max: number, a: number = 0, b: number = 1) => {
+        const part1 = b - a;
+        const part2a = x - min
+        const part2b = max - min;
+        const part2 = part2a / part2b;
+
+        return part1 * part2 + a;
+    };
 
     const newVertexMatrix = stars.map(s => {
 
@@ -98,10 +103,10 @@ main() {
 
         let vertex = [
             //  x      y       r           g        b     a
-            xOne,  yOne,    color.r, color.g, color.b, 1,
-            xZero, yOne,    color.r, color.g, color.b, 1,
-            xOne,  yZero,   color.r, color.g, color.b, 1,
-            xZero, yZero,   color.r, color.g, color.b, 1
+            xOne, yOne, color.r, color.g, color.b, 1,
+            xZero, yOne, color.r, color.g, color.b, 1,
+            xOne, yZero, color.r, color.g, color.b, 1,
+            xZero, yZero, color.r, color.g, color.b, 1
         ];
         console.log(vertex)
         return vertex;
@@ -112,12 +117,12 @@ main() {
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexArray), gl.DYNAMIC_DRAW)
 
         gl.enableVertexAttribArray(positionAttribute)
-        gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 6*4, 0)
+        gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 6 * 4, 0)
 
         gl.enableVertexAttribArray(colorAttribute)
-        gl.vertexAttribPointer(colorAttribute, 4, gl.FLOAT, false, 6*4, 2*4)
+        gl.vertexAttribPointer(colorAttribute, 4, gl.FLOAT, false, 6 * 4, 2 * 4)
 
-        const indexArray = [ 0, 2, 3, 0, 3, 1 ]
+        const indexArray = [0, 2, 3, 0, 3, 1]
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexArray), gl.STATIC_DRAW)
