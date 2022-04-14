@@ -1,3 +1,6 @@
+import {Star, StarfieldOptions} from "./types";
+import {StarFactory} from "./StarFactory";
+
 export const generateCanvas = () => {
     const elem = document.querySelector('body');
     const canvas = document.createElement('canvas');
@@ -15,3 +18,26 @@ export const generateCanvas = () => {
     elem.appendChild(canvas);
     return canvas;
 }
+
+export const generateStars = function (options: StarfieldOptions, canvas: HTMLCanvasElement): Star[] {
+    const settings = {
+        starDensity: 1.0,
+        mouseScale: 1.0,
+        seedMovement: true, ...options,
+    };
+
+    const stars: Star[] = [];
+
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    const totalPixels = width * height;
+    const starRatio = 0.002 * settings.starDensity;
+    const numStars = Math.floor(totalPixels * starRatio);
+
+    for (let i = 0; i < numStars; i++) {
+        stars.push(StarFactory.getRandomStar(width, height));
+    }
+
+    return stars;
+};

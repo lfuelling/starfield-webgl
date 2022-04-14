@@ -1,32 +1,9 @@
 import {StarFactory} from "./StarFactory";
 import {FunctionalWorker, MessageData, Star, StarfieldOptions} from "./types";
-import {generateCanvas} from "./utils";
+import {generateCanvas, generateStars} from "./utils";
 
 
 (() => {
-    const generateStars = function (options: StarfieldOptions, canvas: HTMLCanvasElement): Star[] {
-        const settings = {
-            starDensity: 1.0,
-            mouseScale: 1.0,
-            seedMovement: true, ...options,
-        };
-
-        const stars: Star[] = [];
-
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-
-        const totalPixels = width * height;
-        const starRatio = 0.002 * settings.starDensity;
-        const numStars = Math.floor(totalPixels * starRatio);
-
-        for (let i = 0; i < numStars; i++) {
-            stars.push(StarFactory.getRandomStar(width, height));
-        }
-
-        return stars;
-    };
-
     const draw = function (messageData: MessageData, canvas: HTMLCanvasElement) {
         const width = messageData.canvasSize.width;
         const height = messageData.canvasSize.height;
