@@ -7,7 +7,7 @@ If you are interested in the "regular version" (that doesn't need jQuery), look 
 ## Usage
 1. `npm i -s starfield-webgl`
 2. ```javascript
-   import {runStarfield} from "./src/starfield";
+   import {runStarfield} from "starfield-webgl/src/starfield";
 
    (runStarfield)();
    ```
