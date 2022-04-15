@@ -1,6 +1,6 @@
 import {Star, StarfieldOptions} from "./types";
-import {StarFactory} from "./StarFactory";
 import {fragmentShaderSource, vertexShaderSource} from "./shaders";
+import {getRandomStar} from "./StarFactory";
 
 export const generateCanvas = () => {
     const elem = document.querySelector('body');
@@ -37,7 +37,7 @@ export const generateStars = function (options: StarfieldOptions, canvas: HTMLCa
     const numStars = Math.floor(totalPixels * starRatio);
 
     for (let i = 0; i < numStars; i++) {
-        stars.push(StarFactory.getRandomStar(width, height));
+        stars.push(getRandomStar(width, height));
     }
 
     return stars;
@@ -58,11 +58,11 @@ export function initGLContext(canvas: HTMLCanvasElement) {
     gl.shaderSource(fragmentShader, fragmentShaderSource)
 
     gl.compileShader(vertexShader)
-    var success = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)
+    let success = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS);
     if (!success) throw new Error(gl.getShaderInfoLog(vertexShader))
 
     gl.compileShader(fragmentShader)
-    var success = gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)
+    success = gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS);
     if (!success) throw new Error(gl.getShaderInfoLog(fragmentShader))
 
     const program = gl.createProgram()
@@ -100,21 +100,18 @@ export const mapStar = (s: Star) => {
     const xOne = xZero < 0 ? xZero - normalizedSize : xZero + normalizedSize;
     const yOne = yZero < 0 ? yZero - normalizedSize : yZero + normalizedSize;
 
-
     const color = {
         r: normalize(1, 0, 255, 0),
         g: normalize(s.color.g, 0, 255, 0),
         b: normalize(s.color.b, 0, 255, 0)
     }
 
-    let vertex = [
-        //  x      y       r           g        b     a
+    return [
         xOne, yOne, color.r, color.g, color.b, 1,
         xZero, yOne, color.r, color.g, color.b, 1,
         xOne, yZero, color.r, color.g, color.b, 1,
         xZero, yZero, color.r, color.g, color.b, 1
     ];
-    return vertex;
 };
 
 export const clearCanvas = (gl: WebGL2RenderingContext) => {
