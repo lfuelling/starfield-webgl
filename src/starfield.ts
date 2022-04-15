@@ -1,7 +1,7 @@
 import {clearCanvas, generateCanvas, generateStars, initGLContext} from "./utils";
 import {Star} from "./types";
 
-(() => {
+export const runStarfield = () => {
     // generate canvas element
     const canvas = generateCanvas();
 
@@ -45,4 +45,4 @@ import {Star} from "./types";
 
     // run animation loop
     animLoop();
-})();
+}
