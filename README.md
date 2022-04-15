@@ -1,8 +1,8 @@
 # Starfield WebGL
 
-This is a WebGL version of [starfield](https://github.com/rocketwagon/jquery-starfield), written in TypeScript.
+This is a WebGL version of [jQuery Starfield][1], written in TypeScript (and without jQuery).
 
-If you are interested in the "regular version" (that doesn't need jQuery), look at the initial commit: [b25c3dbcc](https://git.lrk.sh/lerk/starfield-webgl/commit/b25c3dbcc4e789864dc0fdb5ac5dd30c12964c78)
+If you are interested in the "regular version" (which also doesn't need jQuery), look at the initial commit: [b25c3dbcc][2]
 
 ## Usage
 1. `npm i -s starfield-webgl`
@@ -26,3 +26,6 @@ Below are notes regarding development.
 3. Build:
     - Dev: `npm run dev`
     - Prod: `npm run build`
+
+[1]: https://github.com/rocketwagon/jquery-starfield
+[2]: https://github.com/lfuelling/starfield-webgl/tree/b25c3dbcc4e789864dc0fdb5ac5dd30c12964c78
