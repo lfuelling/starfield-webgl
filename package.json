@@ -1,6 +1,6 @@
 {
   "name": "starfield-webgl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WebGl version of starfield.",
   "source": "src/starfield.ts",
   "browserslist": [
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.lrk.sh:lerk/starfield-webgl.git"
+    "url": "git@github.com:lfueling/starfield-webgl.git"
   },
   "keywords": [
     "frontend",
