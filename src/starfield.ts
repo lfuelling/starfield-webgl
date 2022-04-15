@@ -11,7 +11,7 @@ function draw(newVertexMatrix: number[][], gl: WebGL2RenderingContext, vertexBuf
 }
 
 const moveStar = (star: Star, time: number) => {
-    const speed = 2;
+    const speed = 50;
     const timeDeltaMillis = Date.now() - time;
     const timeDeltaSecs = timeDeltaMillis / 1000
     const distance = speed * timeDeltaSecs;
