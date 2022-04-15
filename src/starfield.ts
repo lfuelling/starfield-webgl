@@ -73,3 +73,21 @@ const moveStar = (star: Star, time: number) => {
 
     animLoop();
 })();
+
+
+(() => {
+    const fpsElem = document.querySelector("#counter");
+
+    let then = 0;
+    function render(now: number) {
+        now *= 0.001;                          // convert to seconds
+        const deltaTime = now - then;          // compute time since last frame
+        then = now;                            // remember time for next frame
+        const fps = 1 / deltaTime;             // compute frames per second
+        fpsElem.textContent = fps.toFixed(1);  // update fps display
+
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+
+})()

@@ -1,9 +1,10 @@
-html,body {
+html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
 }
+
 body {
   display: flex;
   align-items: center;
@@ -24,5 +25,16 @@ body {
     &:hover {
       color: #aaa;
     }
+  }
+
+  #fps {
+    top: 0;
+    left: 0;
+    position: fixed;
+
+    margin: 1rem;
+
+    font-size: 1rem;
+    font-family: monospace !important;
   }
 }
