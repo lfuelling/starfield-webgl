@@ -1,8 +1,4 @@
-import {normalize} from "./utils";
-
-const COORDINATE_LENGTH = 5000;
-const deltaX = 0.12;
-const deltaY = 0.04;
+import {COORDINATE_LENGTH, MOVEMENT_X, MOVEMENT_Y, normalize} from "./utils";
 
 export class Color {
     r: number;
@@ -23,7 +19,7 @@ export class Star {
     size: number;
     color: Color;
 
-    constructor(x: number, y: number, z:number, size: number, color: Color) {
+    constructor(x: number, y: number, z: number, size: number, color: Color) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -37,8 +33,8 @@ export class Star {
         const timeDeltaSecs = timeDeltaMillis / 1000
         const distance = speed * timeDeltaSecs;
 
-        let newX = this.x - (distance * deltaX);
-        let newY = this.y - (distance * deltaY);
+        let newX = this.x - (distance * MOVEMENT_X);
+        let newY = this.y - (distance * MOVEMENT_Y);
 
         if (newX < 0) {
             newX += COORDINATE_LENGTH;

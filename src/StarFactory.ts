@@ -1,6 +1,5 @@
 import {Color, Star} from "./types";
-
-export const COORDINATE_LENGTH = 5000;
+import {COORDINATE_LENGTH} from "./utils";
 
 // http://codetheory.in/weighted-biased-random-number-generation-with-javascript-based-on-probability/
 const getWeightedRandom = <T>(list: T[], weight: number[]) => {
