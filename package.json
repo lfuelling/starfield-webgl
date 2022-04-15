@@ -2,7 +2,7 @@
   "name": "starfield-webgl",
   "version": "1.0.0",
   "description": "WebGl version of starfield.",
-  "source": "index.html",
+  "source": "src/starfield.ts",
   "browserslist": [
     "> 0.5%",
     "last 2 versions",
@@ -19,9 +19,10 @@
   },
   "keywords": [
     "frontend",
-    "react"
+    "webgl",
+    "space"
   ],
-  "author": "",
+  "author": "Lukas Fülling (lukas@k40s.net)",
   "license": "MIT",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.4.1",
