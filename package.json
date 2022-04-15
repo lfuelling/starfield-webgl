@@ -25,6 +25,7 @@
   "author": "Lukas Fülling (lukas@k40s.net)",
   "license": "MIT",
   "devDependencies": {
+    "@parcel/transformer-glsl": "^2.4.1",
     "@parcel/transformer-sass": "^2.4.1",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",

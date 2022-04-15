@@ -1,5 +1,5 @@
 import {Star, StarfieldOptions} from "./types";
-import {fragmentShaderSource, vertexShaderSource} from "./shaders";
+import {fragmentShaderSource, vertexShaderSource} from "./shaders/shaders";
 import {getRandomStar} from "./StarFactory";
 
 export const generateCanvas = () => {
