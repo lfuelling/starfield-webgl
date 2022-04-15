@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "WebGl version of starfield.",
   "source": "src/starfield.ts",
+  "main": "dist/starfield.js",
+  "module": "dist/starfield-module.js",
+  "types": "dist/starfield.d.ts",
   "browserslist": [
     "> 0.5%",
     "last 2 versions",
@@ -11,7 +14,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
@@ -25,8 +28,10 @@
   "author": "Lukas Fülling (lukas@k40s.net)",
   "license": "MIT",
   "devDependencies": {
+    "@parcel/packager-ts": "^2.4.1",
     "@parcel/transformer-glsl": "^2.4.1",
     "@parcel/transformer-sass": "^2.4.1",
+    "@parcel/transformer-typescript-types": "^2.4.1",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.12.0",
@@ -36,6 +41,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@swc/helpers": "^0.3.8",
     "gl-matrix": "^3.4.3"
   }
 }
