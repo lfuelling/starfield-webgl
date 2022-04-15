@@ -19,12 +19,14 @@ export class Color {
 export class Star {
     x: number;
     y: number;
+    z: number;
     size: number;
     color: Color;
 
-    constructor(x: number, y: number, size: number, color: Color) {
+    constructor(x: number, y: number, z:number, size: number, color: Color) {
         this.x = x;
         this.y = y;
+        this.z = z;
         this.size = size;
         this.color = color;
     }

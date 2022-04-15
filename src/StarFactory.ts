@@ -70,8 +70,9 @@ const applyRandomShade = (color: Color) => {
 export const getRandomStar = (): Star => {
     const x = Math.floor(Math.random() * (COORDINATE_LENGTH + 1));
     const y = Math.floor(Math.random() * (COORDINATE_LENGTH + 1));
+    const z = Math.floor(Math.random() * (4 + 1));
     const size = getWeightedRandomSize();
     const color = getWeightedRandomColor();
     const tintedColor = applyRandomShade(color);
-    return new Star(x, y, size, tintedColor);
+    return new Star(x, y, z, size, tintedColor);
 }
