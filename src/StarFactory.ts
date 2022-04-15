@@ -67,17 +67,11 @@ const applyRandomShade = (color: Color) => {
  * Generates all random values to create a random star
  * @return {Star} a star with random X/Y, size and color
  */
-export const getRandomStar = (canvasWidth: number, canvasHeight: number) => {
+export const getRandomStar = (): Star => {
     const x = Math.floor(Math.random() * (COORDINATE_LENGTH + 1));
     const y = Math.floor(Math.random() * (COORDINATE_LENGTH + 1));
     const size = getWeightedRandomSize();
     const color = getWeightedRandomColor();
     const tintedColor = applyRandomShade(color);
-    return {
-        ...new Star(x, y, size, tintedColor),
-        canvasCoords: {
-            x: Math.round((x / COORDINATE_LENGTH) * canvasWidth),
-            y: Math.round((y / COORDINATE_LENGTH) * canvasHeight),
-        }
-    };
+    return new Star(x, y, size, tintedColor);
 }

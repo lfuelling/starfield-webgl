@@ -37,7 +37,7 @@ export const generateStars = function (options: StarfieldOptions, canvas: HTMLCa
     const numStars = Math.floor(totalPixels * starRatio);
 
     for (let i = 0; i < numStars; i++) {
-        stars.push(getRandomStar(width, height));
+        stars.push(getRandomStar());
     }
 
     return stars;
@@ -78,10 +78,13 @@ export function initGLContext(canvas: HTMLCanvasElement) {
 
     gl.viewport(0, 0, width, height);
 
+    const positionVAO = gl.createVertexArray();
+    gl.bindVertexArray(positionVAO);
+
     return {gl, positionAttribute, colorAttribute};
 }
 
-const normalize = (x: number, min: number, max: number, a: number = -1, b: number = 1) => {
+export const normalize = (x: number, min: number, max: number, a: number = -1, b: number = 1) => {
     const part1 = b - a;
     const part2a = x - min
     const part2b = max - min;
@@ -90,51 +93,7 @@ const normalize = (x: number, min: number, max: number, a: number = -1, b: numbe
     return part1 * part2 + a;
 };
 
-export const mapStar = (s: Star) => {
-
-    const xZero = normalize(s.x, 0, 5000);
-    const yZero = normalize(s.y, 0, 5000);
-
-    let normalizedSize = normalize(s.size, 0, 5000, 0);
-
-    const xOne = xZero < 0 ? xZero - normalizedSize : xZero + normalizedSize;
-    const yOne = yZero < 0 ? yZero - normalizedSize : yZero + normalizedSize;
-
-    const color = {
-        r: normalize(1, 0, 255, 0),
-        g: normalize(s.color.g, 0, 255, 0),
-        b: normalize(s.color.b, 0, 255, 0)
-    }
-
-    return [
-        xOne, yOne, color.r, color.g, color.b, 1,
-        xZero, yOne, color.r, color.g, color.b, 1,
-        xOne, yZero, color.r, color.g, color.b, 1,
-        xZero, yZero, color.r, color.g, color.b, 1
-    ];
-};
-
 export const clearCanvas = (gl: WebGL2RenderingContext) => {
     gl.clearColor(0, 0, 0, 1)
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-}
-
-export const renderStar = (gl: WebGL2RenderingContext, vertexBuffer: WebGLBuffer, positionAttribute: number, colorAttribute: number, indexBuffer: WebGLBuffer) => {
-    return (star: number[]) => {
-        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(star), gl.DYNAMIC_DRAW)
-
-        gl.enableVertexAttribArray(positionAttribute)
-        gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 6 * 4, 0)
-
-        gl.enableVertexAttribArray(colorAttribute)
-        gl.vertexAttribPointer(colorAttribute, 4, gl.FLOAT, false, 6 * 4, 2 * 4)
-
-        const indexArray = [0, 2, 3, 0, 3, 1]
-
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
-        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexArray), gl.STATIC_DRAW)
-
-        gl.drawElements(gl.TRIANGLES, indexArray.length, gl.UNSIGNED_SHORT, 0);
-    };
 }
