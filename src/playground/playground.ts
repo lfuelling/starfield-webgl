@@ -4,92 +4,9 @@
 // Initialize the buffers we'll need. For this demo, we just
 // have one object -- a simple two-dimensional square.
 //
-import {generateCanvas, generateStars} from "../utils";
-import {fragmentShaderSource, vertexShaderSource} from "../shaders";
+import {generateCanvas, generateStars, initGLContext, mapStar} from "../utils";
 
-(() => {
-
-    const canvas = generateCanvas();
-    const stars = generateStars({starDensity: 6}, canvas);
-
-    const gl = canvas.getContext('webgl2', {antialias: true})
-    const width = canvas.clientWidth
-    const height = canvas.clientHeight
-
-    canvas.width = width
-    canvas.height = height
-
-    const vertexShader = gl.createShader(gl.VERTEX_SHADER)
-    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)
-
-    gl.shaderSource(vertexShader, vertexShaderSource)
-    gl.shaderSource(fragmentShader, fragmentShaderSource)
-
-    gl.compileShader(vertexShader)
-    var success = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)
-    if (!success) throw new Error(gl.getShaderInfoLog(vertexShader))
-
-    gl.compileShader(fragmentShader)
-    var success = gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)
-    if (!success) throw new Error(gl.getShaderInfoLog(fragmentShader))
-
-    const program = gl.createProgram()
-
-    gl.attachShader(program, vertexShader)
-    gl.attachShader(program, fragmentShader)
-
-    gl.linkProgram(program)
-    gl.useProgram(program)
-
-    const positionAttribute = gl.getAttribLocation(program, 'position')
-    const colorAttribute = gl.getAttribLocation(program, 'color')
-
-    gl.viewport(0, 0, width, height)
-    gl.clearColor(0, 0, 0, 1)
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-
-    const positionVAO = gl.createVertexArray()
-    gl.bindVertexArray(positionVAO)
-
-    const vertexBuffer = gl.createBuffer()
-    const indexBuffer = gl.createBuffer()
-
-    const normalize = (x: number, min: number, max: number, a: number = -1, b: number = 1) => {
-        const part1 = b - a;
-        const part2a = x - min
-        const part2b = max - min;
-        const part2 = part2a / part2b;
-
-        return part1 * part2 + a;
-    };
-
-    const newVertexMatrix = stars.map(s => {
-
-        const xZero = normalize(s.x, 0, 5000);
-        const yZero = normalize(s.y, 0, 5000);
-
-        let normalizedSize = normalize(s.size, 0, 5000, 0);
-
-        const xOne = xZero < 0 ? xZero - normalizedSize : xZero + normalizedSize;
-        const yOne = yZero < 0 ? yZero - normalizedSize : yZero + normalizedSize;
-
-
-        const color = {
-            r: normalize(1, 0, 255, 0),
-            g: normalize(s.color.g, 0, 255, 0),
-            b: normalize(s.color.b, 0, 255, 0)
-        }
-
-        let vertex = [
-            //  x      y       r           g        b     a
-            xOne, yOne, color.r, color.g, color.b, 1,
-            xZero, yOne, color.r, color.g, color.b, 1,
-            xOne, yZero, color.r, color.g, color.b, 1,
-            xZero, yZero, color.r, color.g, color.b, 1
-        ];
-        return vertex;
-    })
-
+function draw(newVertexMatrix: number[][], gl: WebGL2RenderingContext, vertexBuffer: WebGLBuffer, positionAttribute: number, colorAttribute: number, indexBuffer: WebGLBuffer) {
     newVertexMatrix.forEach(vertexArray => {
         gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexArray), gl.DYNAMIC_DRAW)
@@ -107,4 +24,30 @@ import {fragmentShaderSource, vertexShaderSource} from "../shaders";
 
         gl.drawElements(gl.TRIANGLES, indexArray.length, gl.UNSIGNED_SHORT, 0);
     });
+}
+
+(() => {
+    // generate canvas element
+    const canvas = generateCanvas();
+
+    // generate initial set of stars
+    const stars = generateStars({starDensity: 6}, canvas);
+
+    // init gl context
+    const {gl, width, height, positionAttribute, colorAttribute} = initGLContext(canvas);
+
+    gl.viewport(0, 0, width, height)
+    gl.clearColor(0, 0, 0, 1)
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+
+    // convert stars to array of numbers
+    const newVertexMatrix = stars.map(mapStar);
+
+    const positionVAO = gl.createVertexArray()
+    gl.bindVertexArray(positionVAO)
+
+    const vertexBuffer = gl.createBuffer()
+    const indexBuffer = gl.createBuffer()
+
+    draw(newVertexMatrix, gl, vertexBuffer, positionAttribute, colorAttribute, indexBuffer);
 })();
