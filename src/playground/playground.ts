@@ -5,6 +5,7 @@
 // have one object -- a simple two-dimensional square.
 //
 import {generateCanvas, generateStars} from "../utils";
+import {fragmentShaderSource, vertexShaderSource} from "../shaders";
 
 (() => {
 
@@ -21,33 +22,8 @@ import {generateCanvas, generateStars} from "../utils";
     const vertexShader = gl.createShader(gl.VERTEX_SHADER)
     const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)
 
-    gl.shaderSource(vertexShader, `#version 300 es
-
-in vec3 position;
-in vec4 color;
-
-out vec4 thecolor;
-
-void
-main() {
-  gl_Position = vec4(position, 1.0);
-
-  thecolor = color;
-}
-`)
-
-    gl.shaderSource(fragmentShader, `#version 300 es
-precision mediump float;
-
-in vec4 thecolor;
-
-out vec4 color;
-
-void
-main() {
-  color = thecolor;
-}
-`)
+    gl.shaderSource(vertexShader, vertexShaderSource)
+    gl.shaderSource(fragmentShader, fragmentShaderSource)
 
     gl.compileShader(vertexShader)
     var success = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)
