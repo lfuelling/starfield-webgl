@@ -32,7 +32,7 @@ export class Star {
     }
 
     move(deltaT: number) {
-        const speed = 50;
+        const speed = 50 / this.z;
         const timeDeltaMillis = Date.now() - deltaT;
         const timeDeltaSecs = timeDeltaMillis / 1000
         const distance = speed * timeDeltaSecs;
