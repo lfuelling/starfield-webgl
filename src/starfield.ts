@@ -1,31 +1,13 @@
-import {clearCanvas, generateCanvas, generateStars, initGLContext, mapStar} from "./utils";
-import {MessageData, Star} from "./types";
+import {clearCanvas, generateCanvas, generateStars, initGLContext, mapStar, renderStar} from "./utils";
+import {Star} from "./types";
 
 const COORDINATE_LENGTH = 5000;
 const deltaX = 0.12;
 const deltaY = 0.04;
 
 function draw(newVertexMatrix: number[][], gl: WebGL2RenderingContext, vertexBuffer: WebGLBuffer, positionAttribute: number, colorAttribute: number, indexBuffer: WebGLBuffer) {
-
     clearCanvas(gl);
-
-    newVertexMatrix.forEach(vertexArray => {
-        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexArray), gl.DYNAMIC_DRAW)
-
-        gl.enableVertexAttribArray(positionAttribute)
-        gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 6 * 4, 0)
-
-        gl.enableVertexAttribArray(colorAttribute)
-        gl.vertexAttribPointer(colorAttribute, 4, gl.FLOAT, false, 6 * 4, 2 * 4)
-
-        const indexArray = [0, 2, 3, 0, 3, 1]
-
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer)
-        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexArray), gl.STATIC_DRAW)
-
-        gl.drawElements(gl.TRIANGLES, indexArray.length, gl.UNSIGNED_SHORT, 0);
-    });
+    newVertexMatrix.forEach(renderStar(gl, vertexBuffer, positionAttribute, colorAttribute, indexBuffer));
 }
 
 const moveStar = (star: Star, time: number) => {
@@ -60,7 +42,7 @@ const moveStar = (star: Star, time: number) => {
     const canvas = generateCanvas();
 
     // generate initial set of stars
-    const stars = generateStars({starDensity: 6}, canvas);
+    const stars = generateStars({starDensity: 1}, canvas);
 
     // init gl context
     const {gl, positionAttribute, colorAttribute} = initGLContext(canvas);
@@ -81,11 +63,11 @@ const moveStar = (star: Star, time: number) => {
 
     const animLoop = () => {
         requestAnimationFrame(() => {
-           animStars = animStars.map(s => moveStar(s, time));
-           time = Date.now();
+            animStars = animStars.map(s => moveStar(s, time));
+            time = Date.now();
 
-           draw(animStars.map(mapStar), gl, vertexBuffer, positionAttribute, colorAttribute, indexBuffer);
-           animLoop();
+            draw(animStars.map(mapStar), gl, vertexBuffer, positionAttribute, colorAttribute, indexBuffer);
+            animLoop();
         });
     }
 

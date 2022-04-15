@@ -23,7 +23,7 @@ export const StarFactory = {
     },
 
     _getWeightedRandomSize: function () {
-        const list = [1, 1.5, 2];
+        const list = [10, 15, 20];
         const weight = [0.8, 0.15, 0.05];
         return this._getWeightedRandom(list, weight);
     },
