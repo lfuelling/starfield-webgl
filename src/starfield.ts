@@ -1,13 +1,15 @@
 import {clearCanvas, generateCanvas, generateStars, initGLContext} from "./utils";
 import {Star, StarfieldOptions} from "./types";
+import Stats from "stats.js";
 
-export const runStarfield = (options: StarfieldOptions) => {
+export const runStarfield = (options?: StarfieldOptions) => {
     // init settings
     const settings = {
         starDensity: 1.0,
         mouseScale: 1.0,
         seedMovement: true,
         fpsLimit: 30,
+        showStats: true,
         ...options,
     };
 
@@ -26,7 +28,7 @@ export const runStarfield = (options: StarfieldOptions) => {
     let time = Date.now();
     let stars: Star[] = generateStars(settings, canvas);
 
-    const draw = (star: number[]) => {
+    const drawStar = (star: number[]) => {
         gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(star), gl.DYNAMIC_DRAW)
 
@@ -45,22 +47,28 @@ export const runStarfield = (options: StarfieldOptions) => {
     let previous = 0;
 
     function shouldSkipFrame(delta: number) {
-        return delta < 1000 / settings.fpsLimit;
+        return delta < 1000 / (settings.fpsLimit + 1);
     }
 
-// define animation loop
+    const fpsCounter = new Stats();
+    fpsCounter.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    settings.showStats && document.body.appendChild(fpsCounter.dom);
+
+    // define animation loop
     const animLoop = () => {
         requestAnimationFrame((current) => {
 
             const delta = current - previous;
 
             if (!shouldSkipFrame(delta)) {
+                fpsCounter.begin();
                 stars.forEach(s => s.move(time));
                 time = Date.now();
                 clearCanvas(gl);
-                stars.map(s => s.getVertex()).forEach(draw);
+                stars.map(s => s.getVertex()).forEach(drawStar);
 
                 previous = current;
+                fpsCounter.end();
             }
 
             animLoop();

@@ -12,7 +12,6 @@
     <meta name="theme-color" content="#000000">
 </head>
 <body>
-<h1 id="fps">FPS:&nbsp;<span id="counter"></span></h1>
 <noscript>This page requires JavaScript :/</noscript>
 
 <!-- Run the starfield script -->
@@ -21,26 +20,6 @@
 
     (() => {
         runStarfield();
-    })();
-</script>
-
-<script type="text/javascript">
-    (() => {
-        const fpsElem = document.querySelector("#counter");
-
-        let then = 0;
-
-        function render(now) {
-            now *= 0.001;                          // convert to seconds
-            const deltaTime = now - then;          // compute time since last frame
-            then = now;                            // remember time for next frame
-            const fps = 1 / deltaTime;             // compute frames per second
-            fpsElem.textContent = fps.toFixed(1);  // update fps display
-
-            requestAnimationFrame(render);
-        }
-
-        requestAnimationFrame(render);
     })();
 </script>
 </body>
