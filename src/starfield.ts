@@ -42,13 +42,26 @@ export const runStarfield = (options: StarfieldOptions) => {
         gl.drawElements(gl.TRIANGLES, indexArray.length, gl.UNSIGNED_SHORT, 0);
     };
 
-    // define animation loop
+    let previous = 0;
+
+    function shouldSkipFrame(delta: number) {
+        return delta < 1000 / settings.fpsLimit;
+    }
+
+// define animation loop
     const animLoop = () => {
-        requestAnimationFrame(() => {
-            stars.forEach(s => s.move(time));
-            time = Date.now();
-            clearCanvas(gl);
-            stars.map(s => s.getVertex()).forEach(draw);
+        requestAnimationFrame((current) => {
+
+            const delta = current - previous;
+
+            if (!shouldSkipFrame(delta)) {
+                stars.forEach(s => s.move(time));
+                time = Date.now();
+                clearCanvas(gl);
+                stars.map(s => s.getVertex()).forEach(draw);
+
+                previous = current;
+            }
 
             animLoop();
         });
