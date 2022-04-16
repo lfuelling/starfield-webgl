@@ -1,7 +1,16 @@
 import {clearCanvas, generateCanvas, generateStars, initGLContext} from "./utils";
-import {Star} from "./types";
+import {Star, StarfieldOptions} from "./types";
 
-export const runStarfield = () => {
+export const runStarfield = (options: StarfieldOptions) => {
+    // init settings
+    const settings = {
+        starDensity: 1.0,
+        mouseScale: 1.0,
+        seedMovement: true,
+        fpsLimit: 30,
+        ...options,
+    };
+
     // generate canvas element
     const canvas = generateCanvas();
 
@@ -15,7 +24,7 @@ export const runStarfield = () => {
 
     // init time and stars
     let time = Date.now();
-    let stars: Star[] = generateStars({starDensity: 1}, canvas);
+    let stars: Star[] = generateStars(settings, canvas);
 
     // define animation loop
     const animLoop = () => {

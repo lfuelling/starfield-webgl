@@ -37,19 +37,13 @@ export const generateCanvas = () => {
 }
 
 export const generateStars = function (options: StarfieldOptions, canvas: HTMLCanvasElement): Star[] {
-    const settings = {
-        starDensity: 1.0,
-        mouseScale: 1.0,
-        seedMovement: true, ...options,
-    };
-
     const stars: Star[] = [];
 
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
 
     const totalPixels = width * height;
-    const starRatio = 0.002 * settings.starDensity;
+    const starRatio = 0.002 * options.starDensity;
     const numStars = Math.floor(totalPixels * starRatio);
 
     for (let i = 0; i < numStars; i++) {

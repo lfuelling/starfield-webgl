@@ -79,4 +79,5 @@ export type StarfieldOptions = {
     starDensity?: number;
     mouseScale?: number;
     seedMovement?: boolean;
+    fpsLimit?: number;
 }
