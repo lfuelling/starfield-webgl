@@ -53,8 +53,8 @@ export const generateStars = function (options: StarfieldOptions, canvas: HTMLCa
     return stars;
 };
 
-export function initGLContext(canvas: HTMLCanvasElement) {
-    const gl = canvas.getContext('webgl2', {antialias: true})
+export function initGLContext(canvas: HTMLCanvasElement, options: StarfieldOptions) {
+    const gl = canvas.getContext('webgl2', {antialias: options.antialiasing})
     const width = canvas.clientWidth
     const height = canvas.clientHeight
 

@@ -8,6 +8,7 @@ export const runStarfield = (options?: StarfieldOptions) => {
         mouseScale: 1.0,
         seedMovement: true,
         fpsLimit: 30,
+        antialiasing: true,
         ...options,
     };
 
@@ -15,7 +16,7 @@ export const runStarfield = (options?: StarfieldOptions) => {
     const canvas = generateCanvas();
 
     // init gl context
-    const {gl, positionAttribute, colorAttribute} = initGLContext(canvas);
+    const {gl, positionAttribute, colorAttribute} = initGLContext(canvas, settings);
 
     // create buffers
     const vertexBuffer = gl.createBuffer();
