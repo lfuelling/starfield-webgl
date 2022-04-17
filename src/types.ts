@@ -80,4 +80,6 @@ export type StarfieldOptions = {
     mouseScale?: number;
     seedMovement?: boolean;
     fpsLimit?: number;
+    onBeforeDraw?: () => void;
+    onAfterDraw?: () => void;
 }

@@ -16,10 +16,18 @@
 
 <!-- Run the starfield script -->
 <script type="module">
+    import Stats from "stats.js";
     import {runStarfield} from "./src/starfield";
 
     (() => {
-        runStarfield();
+        const fpsCounter = new Stats();
+        fpsCounter.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+        document.body.appendChild(fpsCounter.dom);
+
+        runStarfield({
+            onBeforeDraw: () => fpsCounter.begin(),
+            onAfterDraw: () => fpsCounter.end()
+        });
     })();
 </script>
 </body>
