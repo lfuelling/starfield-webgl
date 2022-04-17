@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
 jobs:
-  build-image:
+  build-github-pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '16'
       - name: Install Dependencies
-        run: npm install
+        run: npm install --production=false
       - name: Build Site
         run: npm run build:demo
       - name: Deploy
