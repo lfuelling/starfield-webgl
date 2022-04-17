@@ -11,9 +11,13 @@ commit: [b25c3dbcc][2]
 2. ```html
    <script type="module">
     import {runStarfield} from "starfield-webgl";
+    
+    const options = {
+       // see src/starfield.ts:6 for default
+    };
 
     (() => {
-        runStarfield();
+        runStarfield(options);
     })();
    </script>
    ```
