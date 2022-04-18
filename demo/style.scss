@@ -27,14 +27,9 @@ body {
     }
   }
 
-  #fps {
-    top: 0;
-    left: 0;
+  #gh-badge {
     position: fixed;
-
-    margin: 1rem;
-
-    font-size: 1rem;
-    font-family: monospace !important;
+    top: 0;
+    right: 0;
   }
 }
