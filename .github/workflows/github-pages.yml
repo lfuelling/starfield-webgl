@@ -1,4 +1,6 @@
 name: Build GitHub Pages site
+env:
+  NODE_ENV: development
 on:
   workflow_dispatch:
   push:
@@ -15,7 +17,7 @@ jobs:
         with:
           node-version: '16'
       - name: Install Dependencies
-        run: npm install --production=false
+        run: npm install
       - name: Build Site
         run: npm run build:demo
       - name: Deploy
