@@ -8,9 +8,15 @@ export const MOVEMENT_Y = 0.04;
 const blackPixelPng = 'url(\'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR4AWNmAAAACAAEbVhFewAAAABJRU5ErkJggg==\')';
 
 export const generateCanvas = () => {
-    const elem = document.querySelector('body');
+    const starfieldElem = document.getElementById('starfield');
+    if (starfieldElem) {
+        return starfieldElem;
+    }
+
+    const body = document.querySelector('body');
     const canvas = document.createElement('canvas');
     canvas.id = 'starfield';
+
     const styleProps = {
         position: 'fixed',
         left: 0,
@@ -21,8 +27,8 @@ export const generateCanvas = () => {
         backgroundImage: blackPixelPng
     };
     const attrProps = {
-        width: elem.clientWidth,
-        height: elem.clientHeight
+        width: body.clientWidth,
+        height: body.clientHeight
     };
     for (const prop in styleProps) {
         // @ts-ignore it works (:
@@ -32,7 +38,7 @@ export const generateCanvas = () => {
         // @ts-ignore it works (:
         canvas.setAttribute(prop, attrProps[prop]);
     }
-    elem.appendChild(canvas);
+    body.appendChild(canvas);
     return canvas;
 }
 
