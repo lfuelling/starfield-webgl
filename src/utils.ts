@@ -10,7 +10,7 @@ const blackPixelPng = 'url(\'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAA
 export const generateCanvas = () => {
     const starfieldElem = document.getElementById('starfield');
     if (starfieldElem) {
-        return starfieldElem;
+        return starfieldElem as HTMLCanvasElement;
     }
 
     const body = document.querySelector('body');
