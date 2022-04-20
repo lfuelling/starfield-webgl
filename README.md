@@ -7,7 +7,7 @@ commit: [b25c3dbcc][2]
 
 ## Usage
 
-1. `npm i -s starfield-webgl`
+1. <code>npm i -s [starfield-webgl](https://www.npmjs.com/package/starfield-webgl)</code>
 2. ```html
    <script type="module">
     import {runStarfield} from "starfield-webgl";
