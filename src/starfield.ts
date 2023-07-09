@@ -1,5 +1,7 @@
-import {clearCanvas, generateCanvas, generateStars, initGLContext} from "./utils";
+import {generateStars} from "./utils";
 import {Star, StarfieldOptions} from "./types";
+import {clearCanvas, generateCanvas} from "./canvas";
+import {initGLContext} from "./webgl";
 
 export const runStarfield = (options?: StarfieldOptions) => {
     // init settings
