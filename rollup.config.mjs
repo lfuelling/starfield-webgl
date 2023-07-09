@@ -4,7 +4,7 @@ import babel from '@rollup/plugin-babel';
 import {string} from "rollup-plugin-string";
 import dts from 'rollup-plugin-dts'
 
-const {main, source, types, browser, module} = require('./package.json');
+import packageJson from './package.json' assert {type: 'json'};
 
 const extensions = [
     '.js', '.jsx', '.ts', '.tsx',
@@ -14,7 +14,7 @@ const name = 'Starfield';
 
 const bundle = config => ({
     ...config,
-    input: source,
+    input: packageJson.source,
 });
 
 export default [
@@ -38,13 +38,13 @@ export default [
         ],
 
         output: [{
-            file: main,
+            file: packageJson.main,
             format: 'cjs',
         }, {
-            file: module,
+            file: packageJson.module,
             format: 'es',
         }, {
-            file: browser,
+            file: packageJson.browser,
             format: 'iife',
             name,
 
@@ -57,7 +57,7 @@ export default [
                 dts(),
             ],
             output: {
-                file: types,
+                file: packageJson.types,
                 format: 'es',
             },
         }
