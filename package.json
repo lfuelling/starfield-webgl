@@ -1,6 +1,6 @@
 {
   "name": "starfield-webgl",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "WebGl version of starfield.",
   "source": "src/index.ts",
   "main": "dist/starfield.js",
