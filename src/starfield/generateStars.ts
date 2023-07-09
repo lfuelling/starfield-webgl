@@ -1,9 +1,5 @@
 import {Star, StarfieldOptions} from "./types";
-import {getRandomStar} from "./StarFactory";
-
-export const COORDINATE_LENGTH = 5000;
-export const MOVEMENT_X = 0.12;
-export const MOVEMENT_Y = 0.04;
+import {getRandomStar} from "./getRandomStar";
 
 export const generateStars = (options: StarfieldOptions, height: number, width: number): Star[] => {
     const stars: Star[] = [];
@@ -17,13 +13,4 @@ export const generateStars = (options: StarfieldOptions, height: number, width: 
     }
 
     return stars;
-};
-
-export const normalize = (x: number, min: number, max: number, a: number = -1, b: number = 1) => {
-    const part1 = b - a;
-    const part2a = x - min
-    const part2b = max - min;
-    const part2 = part2a / part2b;
-
-    return part1 * part2 + a;
 };

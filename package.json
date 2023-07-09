@@ -2,7 +2,7 @@
   "name": "starfield-webgl",
   "version": "1.4.0",
   "description": "WebGl version of starfield.",
-  "source": "src/starfield.ts",
+  "source": "src/index.ts",
   "main": "dist/starfield.js",
   "module": "dist/starfield-module.js",
   "browser": "dist/starfield-iife.js",

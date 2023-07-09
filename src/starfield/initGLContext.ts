@@ -1,5 +1,5 @@
 import {StarfieldOptions} from "./types";
-import {fragmentShaderSource, vertexShaderSource} from "./shaders/shaders";
+import {fragmentShaderSource, vertexShaderSource} from "../shaders/shaders";
 
 export const initGLContext = (canvas: HTMLCanvasElement, options: StarfieldOptions) => {
     const gl = canvas.getContext('webgl2', {antialias: options.antialiasing})

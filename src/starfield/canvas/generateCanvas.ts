@@ -1,10 +1,5 @@
 const blackPixelPng = 'url(\'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR4AWNmAAAACAAEbVhFewAAAABJRU5ErkJggg==\')';
 
-export const clearCanvas = (gl: WebGL2RenderingContext) => {
-    gl.clearColor(0, 0, 0, 1)
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-}
-
 export const generateCanvas = () => {
     const starfieldElem = document.getElementById('starfield');
     if (starfieldElem) {

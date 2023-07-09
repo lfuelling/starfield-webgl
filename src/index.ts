@@ -1,3 +1,8 @@
-export * from "./starfield";
-export {generateCanvas} from "./canvas";
-export {generateStars} from "./utils";
+export {
+    drawFrame,
+    initBuffers,
+    generateStars,
+    generateCanvas,
+    runStarfield,
+    DEFAULT_STARFIELD_OPTIONS
+} from "./starfield";

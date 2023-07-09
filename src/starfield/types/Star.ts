@@ -1,16 +1,5 @@
-import {COORDINATE_LENGTH, MOVEMENT_X, MOVEMENT_Y, normalize} from "./utils";
-
-export class Color {
-    r: number;
-    g: number;
-    b: number;
-
-    constructor(r: number, g: number, b: number) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-    }
-}
+import {COORDINATE_LENGTH, MOVEMENT_X, MOVEMENT_Y, normalize} from "../utils";
+import {Color} from "./Color";
 
 export class Star {
     x: number;
@@ -25,7 +14,7 @@ export class Star {
         this.z = z;
         this.size = size;
         this.color = color;
-    }
+    };
 
     move(deltaT: number) {
         const speed = 50 / this.z;
@@ -49,7 +38,7 @@ export class Star {
 
         this.x = newX;
         this.y = newY;
-    }
+    };
 
     getVertex(): number[] {
         const xZero = normalize(this.x, 0, 5000);
@@ -72,15 +61,5 @@ export class Star {
             xOne, yZero, color.r, color.g, color.b, 1,
             xZero, yZero, color.r, color.g, color.b, 1
         ];
-    }
-}
-
-export type StarfieldOptions = {
-    starDensity?: number;
-    mouseScale?: number;
-    seedMovement?: boolean;
-    fpsLimit?: number;
-    antialiasing?: boolean;
-    onBeforeDraw?: () => void;
-    onAfterDraw?: () => void;
+    };
 }

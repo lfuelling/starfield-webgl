@@ -1,4 +1,4 @@
-import {Star} from "./src/types";
+import {Star} from "./src/starfield/types";
 
 /**
  * The configuration options for starfield-webgl
