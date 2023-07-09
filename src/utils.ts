@@ -1,16 +1,12 @@
 import {Star, StarfieldOptions} from "./types";
-import {fragmentShaderSource, vertexShaderSource} from "./shaders/shaders";
 import {getRandomStar} from "./StarFactory";
 
 export const COORDINATE_LENGTH = 5000;
 export const MOVEMENT_X = 0.12;
 export const MOVEMENT_Y = 0.04;
 
-export const generateStars = function (options: StarfieldOptions, canvas: HTMLCanvasElement): Star[] {
+export const generateStars = (options: StarfieldOptions, height: number, width: number): Star[] => {
     const stars: Star[] = [];
-
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
 
     const totalPixels = width * height;
     const starRatio = 0.002 * options.starDensity;

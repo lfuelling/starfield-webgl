@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Starfield WebGL</title>
+    <title>Starfield WebGL (Single Frame)</title>
     <link rel="stylesheet" href="style.scss"/>
 
     <meta name="msapplication-TileColor" content="#000000">
@@ -15,24 +15,30 @@
 
 <a id="gh-badge" href="https://github.com/lfuelling/starfield-webgl"><img width="149" height="149" src="./badge.png" alt="Fork starfield-webgl on GitHub" /></a>
 
-<a href="./single.html">Single Frame Version</a>
+<a href="./index.html">Dynamic Version</a>
 
 <noscript>This page requires JavaScript :/</noscript>
 
-<!-- Run the starfield script -->
+<!-- Render a single starfield frame -->
 <script type="module">
-    import Stats from "stats.js";
-    import {runStarfield} from "../src";
+
+    import {
+        DEFAULT_STARFIELD_OPTIONS,
+        generateStars,
+        generateCanvas,
+        initBuffers,
+        drawFrame,
+    } from "../src";
 
     (() => {
-        const fpsCounter = new Stats();
-        fpsCounter.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-        document.body.appendChild(fpsCounter.dom);
+        // init stuff
+        const settings = DEFAULT_STARFIELD_OPTIONS;
+        const canvas = generateCanvas();
+        const buffers = initBuffers(canvas, settings);
+        const stars = generateStars(settings, canvas.clientHeight, canvas.clientWidth);
 
-        runStarfield({
-            onBeforeDraw: () => fpsCounter.begin(),
-            onAfterDraw: () => fpsCounter.end()
-        });
+        // draw a single frame
+        drawFrame(stars, buffers);
     })();
 </script>
 </body>

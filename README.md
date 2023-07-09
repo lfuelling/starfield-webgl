@@ -29,7 +29,7 @@ Below are notes regarding development.
 ## Requirements
 
 - Node >= v12
-- Parcel (`npm i -g parcel`)
+- (Development only) Parcel (`npm i -g parcel`)
 
 ## Usage
 
