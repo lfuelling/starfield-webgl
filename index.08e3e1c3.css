@@ -1,0 +1,33 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #fff;
+  background-color: #000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  font-size: 1.2rem;
+  display: flex;
+}
+
+body a, body a:visited {
+  color: #fff;
+}
+
+body a:hover {
+  color: #aaa;
+}
+
+body #gh-badge {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+/*# sourceMappingURL=index.08e3e1c3.css.map */
