@@ -24,8 +24,12 @@ export const runStarfield = (options?: StarfieldOptions) => {
 
     let previous = 0;
 
-    function shouldSkipFrame(delta: number) {
-        return delta < 1000 / (settings.fpsLimit + 1);
+    function shouldSkipFrame(delta: number): boolean {
+        if(settings.fpsLimit <= 0) {
+            return false;
+        } else {
+            return delta < 1000 / (settings.fpsLimit + 1);
+        }
     }
 
     // define animation loop
