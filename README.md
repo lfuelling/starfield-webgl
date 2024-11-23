@@ -12,8 +12,15 @@ commit: [b25c3dbcc][2]
    <script type="module">
     import {runStarfield} from "starfield-webgl";
     
+   // default options
     const options = {
-       // see src/starfield.ts:6 for default
+        starDensity: 1.0,
+        mouseScale: 1.0,
+        seedMovement: true,
+        fpsLimit: 30, // set to <= 0 to disable
+        antialiasing: true,
+        // onBeforeDraw?: () => void;
+        // onAfterDraw?: () => void;
     };
 
     (() => {
