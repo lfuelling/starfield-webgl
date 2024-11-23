@@ -14,7 +14,7 @@ export class Star {
         this.z = z;
         this.size = size;
         this.color = color;
-    };
+    }
 
     move(deltaT: number) {
         const speed = 50 / this.z;
@@ -38,13 +38,13 @@ export class Star {
 
         this.x = newX;
         this.y = newY;
-    };
+    }
 
     getVertex(): number[] {
         const xZero = normalize(this.x, 0, 5000);
         const yZero = normalize(this.y, 0, 5000);
 
-        let normalizedSize = normalize(this.size, 0, 5000, 0);
+        const normalizedSize = normalize(this.size, 0, 5000, 0);
 
         const xOne = xZero < 0 ? xZero - normalizedSize : xZero + normalizedSize;
         const yOne = yZero < 0 ? yZero - normalizedSize : yZero + normalizedSize;
@@ -61,5 +61,5 @@ export class Star {
             xOne, yZero, color.r, color.g, color.b, 1,
             xZero, yZero, color.r, color.g, color.b, 1
         ];
-    };
+    }
 }
