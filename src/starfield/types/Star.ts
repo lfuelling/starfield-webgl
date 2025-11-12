@@ -13,13 +13,13 @@ export class Star {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.speed = 50 / this.z;
+        this.speed = (50 / this.z) / 1000;
         this.size = size;
         this.color = color;
     }
 
-    move(timeDeltaSecs: number) {
-        const distance = this.speed * timeDeltaSecs;
+    move(timeDelta: number) {
+        const distance = this.speed * timeDelta;
 
         let newX = this.x - (distance * MOVEMENT_X);
         let newY = this.y - (distance * MOVEMENT_Y);

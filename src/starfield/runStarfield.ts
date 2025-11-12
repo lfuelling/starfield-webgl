@@ -21,13 +21,16 @@ export const runStarfield = (options?: StarfieldOptions) => {
     // init stars
     const stars: Star[] = generateStars(settings, canvas.clientHeight, canvas.clientWidth);
 
+    // init frame limit
+    const frameLimit = 1000 / (settings.fpsLimit + 1);
+
     let previous = 0;
 
-    function shouldSkipFrame(delta: number): boolean {
-        if(settings.fpsLimit <= 0) {
-            return false;
+    function shouldRenderFrame(delta: number, frameLimit: number): boolean {
+        if (settings.fpsLimit <= 0) {
+            return true;
         } else {
-            return delta < 1000 / (settings.fpsLimit + 1);
+            return delta >= frameLimit;
         }
     }
 
@@ -37,13 +40,12 @@ export const runStarfield = (options?: StarfieldOptions) => {
 
             const delta = current - previous;
 
-            if (!shouldSkipFrame(delta)) {
+            if (shouldRenderFrame(delta, frameLimit)) {
                 if (typeof settings.onBeforeDraw === 'function') settings.onBeforeDraw();
                 previous = current;
 
                 // move stars
-                const deltaSecs = delta / 1000;
-                stars.forEach(s => s.move(deltaSecs));
+                stars.forEach(s => s.move(delta));
 
                 // draw frame
                 drawFrame(stars, buffers);
