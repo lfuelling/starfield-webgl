@@ -5,6 +5,7 @@ export class Star {
     x: number;
     y: number;
     z: number;
+    speed: number;
     size: number;
     color: Color;
 
@@ -12,15 +13,15 @@ export class Star {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.speed = 50 / this.z;
         this.size = size;
         this.color = color;
     }
 
     move(deltaT: number) {
-        const speed = 50 / this.z;
         const timeDeltaMillis = Date.now() - deltaT;
         const timeDeltaSecs = timeDeltaMillis / 1000
-        const distance = speed * timeDeltaSecs;
+        const distance = this.speed * timeDeltaSecs;
 
         let newX = this.x - (distance * MOVEMENT_X);
         let newY = this.y - (distance * MOVEMENT_Y);
