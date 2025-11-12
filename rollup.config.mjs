@@ -1,10 +1,11 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 import {string} from "rollup-plugin-string";
 import dts from 'rollup-plugin-dts'
 
-import packageJson from './package.json' assert {type: 'json'};
+import packageJson from './package.json' with {type: 'json'};
 
 const extensions = [
     '.js', '.jsx', '.ts', '.tsx',
@@ -30,6 +31,7 @@ export default [
             commonjs(),
 
             // Compile TypeScript/JavaScript files
+            typescript(),
             babel({
                 extensions,
                 babelHelpers: 'bundled',
