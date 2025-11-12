@@ -20,7 +20,7 @@ export const runStarfield = (options?: StarfieldOptions) => {
 
     // init time and stars
     let time = Date.now();
-    let stars: Star[] = generateStars(settings, canvas.clientHeight, canvas.clientWidth);
+    const stars: Star[] = generateStars(settings, canvas.clientHeight, canvas.clientWidth);
 
     let previous = 0;
 
@@ -39,7 +39,7 @@ export const runStarfield = (options?: StarfieldOptions) => {
             const delta = current - previous;
 
             if (!shouldSkipFrame(delta)) {
-                (typeof settings.onBeforeDraw === 'function') && settings.onBeforeDraw();
+                if (typeof settings.onBeforeDraw === 'function') settings.onBeforeDraw();
                 previous = current;
 
                 // move stars
@@ -49,7 +49,7 @@ export const runStarfield = (options?: StarfieldOptions) => {
                 // draw frame
                 drawFrame(stars, buffers);
 
-                (typeof settings.onAfterDraw === 'function') && settings.onAfterDraw();
+                if (typeof settings.onAfterDraw === 'function') settings.onAfterDraw();
             }
 
             animLoop();
