@@ -18,8 +18,7 @@ export const runStarfield = (options?: StarfieldOptions) => {
     // init buffers
     const buffers = initBuffers(canvas, settings);
 
-    // init time and stars
-    let time = Date.now();
+    // init stars
     const stars: Star[] = generateStars(settings, canvas.clientHeight, canvas.clientWidth);
 
     let previous = 0;
@@ -43,8 +42,8 @@ export const runStarfield = (options?: StarfieldOptions) => {
                 previous = current;
 
                 // move stars
-                stars.forEach(s => s.move(time));
-                time = Date.now();
+                const deltaSecs = delta / 1000;
+                stars.forEach(s => s.move(deltaSecs));
 
                 // draw frame
                 drawFrame(stars, buffers);

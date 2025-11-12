@@ -18,9 +18,7 @@ export class Star {
         this.color = color;
     }
 
-    move(deltaT: number) {
-        const timeDeltaMillis = Date.now() - deltaT;
-        const timeDeltaSecs = timeDeltaMillis / 1000
+    move(timeDeltaSecs: number) {
         const distance = this.speed * timeDeltaSecs;
 
         let newX = this.x - (distance * MOVEMENT_X);
