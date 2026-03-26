@@ -4,6 +4,14 @@
   "description": "WebGl version of starfield.",
   "source": "src/index.ts",
   "main": "dist/starfield.js",
+  "exports": {
+    ".": {
+      "types": "./dist/starfield.d.ts",
+      "import": "./dist/starfield-module.js",
+      "require": "./dist/starfield.js",
+      "default": "./dist/starfield-module.js"
+    }
+  },
   "module": "dist/starfield-module.js",
   "browser": "dist/starfield-iife.js",
   "types": "dist/starfield.d.ts",
